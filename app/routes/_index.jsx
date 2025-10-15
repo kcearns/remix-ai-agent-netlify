@@ -88,7 +88,7 @@ export default function Index() {
           {product.description}
         </p>
         <button style={{
-          backgroundColor: "#ff6b6b",
+          backgroundColor: "#10b981",
           color: "white",
           border: "none",
           padding: "18px 45px",
@@ -208,7 +208,7 @@ export default function Index() {
                     top: "-15px",
                     left: "50%",
                     transform: "translateX(-50%)",
-                    backgroundColor: "#ff6b6b",
+                    backgroundColor: "#10b981",
                     color: "white",
                     padding: "5px 20px",
                     borderRadius: "20px",
