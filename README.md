@@ -76,7 +76,29 @@ remix-ai-agent-netlify/
 
 ## Deployment
 
-This project is configured to work with Netlify. Simply connect your repository to Netlify and it will automatically detect the Remix configuration and deploy your application.
+This project is configured to deploy on Netlify using Netlify Functions for server-side rendering.
+
+### Netlify Configuration
+
+The project uses:
+- **@remix-run/netlify** - Adapter for Netlify Functions
+- **netlify.toml** - Netlify configuration file
+- **netlify/functions/server.js** - Netlify Function handler for SSR
+
+### How it works
+
+1. Build process generates:
+   - Client-side assets in `build/client`
+   - Server bundle in `build/server`
+2. All requests are routed through the Netlify Function at `/.netlify/functions/server`
+3. The function uses Remix's server-side rendering to generate HTML responses
+
+### Deploying to Netlify
+
+1. Connect your repository to Netlify
+2. Netlify will automatically detect the configuration from `netlify.toml`
+3. The build command (`npm run build`) will be executed
+4. Your application will be deployed with full SSR support
 
 ## License
 
