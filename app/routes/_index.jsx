@@ -21,7 +21,27 @@ export async function loader() {
         "Industry-leading performance"
       ],
       launchDate: "Coming Soon",
-      price: "$299"
+      pricingTiers: [
+        {
+          name: "Starter",
+          price: "$199",
+          description: "Perfect for individuals",
+          features: ["Basic AI features", "Email support", "5 projects"]
+        },
+        {
+          name: "Pro",
+          price: "$299",
+          description: "Most popular choice",
+          features: ["Advanced AI features", "Priority support", "Unlimited projects", "Team collaboration"],
+          popular: true
+        },
+        {
+          name: "Enterprise",
+          price: "$599",
+          description: "For large organizations",
+          features: ["Full AI suite", "24/7 dedicated support", "Unlimited everything", "Custom integrations", "SLA guarantee"]
+        }
+      ]
     }
   });
 }
@@ -153,44 +173,119 @@ export default function Index() {
           <h2 style={{
             fontSize: "2rem",
             color: "#333",
-            marginBottom: "20px"
+            marginBottom: "50px"
           }}>
-            Special Launch Price
+            Special Launch Pricing
           </h2>
           <div style={{
-            fontSize: "3rem",
-            fontWeight: "bold",
-            color: "#667eea",
-            marginBottom: "15px"
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "30px",
+            maxWidth: "1200px",
+            margin: "0 auto"
           }}>
-            {product.price}
+            {product.pricingTiers.map((tier, index) => (
+              <div key={index} style={{
+                backgroundColor: tier.popular ? "#667eea" : "white",
+                color: tier.popular ? "white" : "#333",
+                padding: "40px 30px",
+                borderRadius: "15px",
+                boxShadow: tier.popular ? "0 8px 24px rgba(102, 126, 234, 0.4)" : "0 4px 12px rgba(0,0,0,0.1)",
+                textAlign: "center",
+                transition: "transform 0.2s",
+                position: "relative",
+                transform: tier.popular ? "scale(1.05)" : "scale(1)"
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = tier.popular ? "scale(1.08)" : "translateY(-5px)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = tier.popular ? "scale(1.05)" : "translateY(0)";
+              }}>
+                {tier.popular && (
+                  <div style={{
+                    position: "absolute",
+                    top: "-15px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    backgroundColor: "#ff6b6b",
+                    color: "white",
+                    padding: "5px 20px",
+                    borderRadius: "20px",
+                    fontSize: "0.85rem",
+                    fontWeight: "600"
+                  }}>
+                    MOST POPULAR
+                  </div>
+                )}
+                <h3 style={{
+                  fontSize: "1.5rem",
+                  marginBottom: "10px",
+                  fontWeight: "bold"
+                }}>
+                  {tier.name}
+                </h3>
+                <p style={{
+                  fontSize: "0.95rem",
+                  opacity: 0.8,
+                  marginBottom: "20px"
+                }}>
+                  {tier.description}
+                </p>
+                <div style={{
+                  fontSize: "3rem",
+                  fontWeight: "bold",
+                  marginBottom: "10px"
+                }}>
+                  {tier.price}
+                </div>
+                <p style={{
+                  fontSize: "0.9rem",
+                  opacity: 0.7,
+                  marginBottom: "30px"
+                }}>
+                  {product.launchDate}
+                </p>
+                <ul style={{
+                  listStyle: "none",
+                  padding: 0,
+                  margin: "0 0 30px 0",
+                  textAlign: "left"
+                }}>
+                  {tier.features.map((feature, fIndex) => (
+                    <li key={fIndex} style={{
+                      padding: "10px 0",
+                      fontSize: "0.95rem",
+                      opacity: 0.9,
+                      borderBottom: fIndex < tier.features.length - 1 ? `1px solid ${tier.popular ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)"}` : "none"
+                    }}>
+                      ✓ {feature}
+                    </li>
+                  ))}
+                </ul>
+                <button style={{
+                  backgroundColor: tier.popular ? "white" : "#667eea",
+                  color: tier.popular ? "#667eea" : "white",
+                  border: "none",
+                  padding: "15px 40px",
+                  fontSize: "1rem",
+                  fontWeight: "600",
+                  borderRadius: "50px",
+                  cursor: "pointer",
+                  width: "100%",
+                  boxShadow: tier.popular ? "0 4px 12px rgba(0,0,0,0.2)" : "0 4px 12px rgba(102, 126, 234, 0.3)"
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.opacity = "0.9";
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.opacity = "1";
+                }}>
+                  Notify Me
+                </button>
+              </div>
+            ))}
           </div>
-          <p style={{
-            fontSize: "1.2rem",
-            color: "#666",
-            marginBottom: "30px"
-          }}>
-            {product.launchDate}
-          </p>
-          <button style={{
-            backgroundColor: "#667eea",
-            color: "white",
-            border: "none",
-            padding: "15px 40px",
-            fontSize: "1rem",
-            fontWeight: "600",
-            borderRadius: "50px",
-            cursor: "pointer",
-            boxShadow: "0 4px 12px rgba(102, 126, 234, 0.3)"
-          }}
-          onMouseOver={(e) => {
-            e.target.style.backgroundColor = "#764ba2";
-          }}
-          onMouseOut={(e) => {
-            e.target.style.backgroundColor = "#667eea";
-          }}>
-            Notify Me
-          </button>
         </div>
       </div>
     </div>
