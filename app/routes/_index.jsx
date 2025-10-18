@@ -1,5 +1,5 @@
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 
 export const meta = () => {
   return [
@@ -286,6 +286,33 @@ export default function Index() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Footer */}
+        <div style={{
+          textAlign: "center",
+          padding: "40px 20px",
+          borderTop: "1px solid rgba(0,0,0,0.1)",
+          marginTop: "60px"
+        }}>
+          <p style={{
+            color: "#666",
+            fontSize: "0.95rem",
+            marginBottom: "15px"
+          }}>
+            © 2025 NovaTech Pro. All rights reserved.
+          </p>
+          <Link to="/contact" style={{
+            color: "#667eea",
+            fontSize: "1rem",
+            textDecoration: "none",
+            fontWeight: "500",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px"
+          }}>
+            Contact Us →
+          </Link>
         </div>
       </div>
     </div>
